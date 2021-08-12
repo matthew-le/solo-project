@@ -38,10 +38,16 @@
                     <div style='flex:2'><img class='row-image' src="{{item.product.imageURL}}" alt="product_logo"></div>
                     <div style='flex:2'>{{item.product.name}}</div>
                     <div style='flex:1'><p>{{item.product.price |floatformat:2}}</p></div>
-                    <div style='flex:1'><p class='quantity'>{{item.quantity}}</p></div>
+                    <div style='flex:1'><p class='quantity'>{{item.quantity}}</p>
+                        <div class="quantity">
+                            <img class="chg-quantity update-cart" src="{% static 'images/up.png' %}" data-action='add' data-product='{{item.product.id}}'>
+                            <img class="chg-quantity update-cart" src="{% static 'images/down.png' %}" data-action='remove' data-product='{{item.product.id}}'>
+                        </div>
+                    </div>
                     <div style='flex:1'><p>${{item.get_total}}</p></div>
                 </div>
                 {% endfor %}
+            </div>
             </div>
         </div>
     </div>

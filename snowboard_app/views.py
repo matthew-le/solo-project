@@ -13,34 +13,46 @@ from .utils import cookieCart, cartData, guestOrder
 
 # Create your views here.
 def registerPage(request):
-    form = CreateUserForm()
+    if request.user.is_authenticated:
+        return redirect('/')
+    else:
+        form = CreateUserForm()
+        if request.method == "POST":
+            form = CreateUserForm(request.POST)
+            email = request.POST.get('email')
+            if form.is_valid():
+                user = form.save()
+                Customer.objects.create(user=user, email=email)
 
-    if request.method == "POST":
-        form = CreateUserForm(request.POST)
-        if form.is_valid():
-            form.save()
-            messages.success(request, 'Account was successfully created!')
-            return redirect('/login')
-    context = {
-        'form': form
-    }
-    return render(request, 'store/register.html', context)
+                messages.success(request, 'Account was successfully created!')
+                return redirect('/login')
+        context = {
+            'form': form
+        }
+        return render(request, 'store/register.html', context)
 
 def loginPage(request):
-    if request.method == "POST":
-        username = request.POST.get('username')
-        password =request.POST.get('password')
+    if request.user.is_authenticated:
+        return redirect('/')
+    else:
+        if request.method == "POST":
+            username = request.POST.get('username')
+            password =request.POST.get('password')
 
-        user = authenticate(request, username = username, password=password)
+            user = authenticate(request, username = username, password=password)
 
-        if user is not None:
-            login(request, user)
-            return redirect('/')
-        else:
-            messages.info(request, 'Username OR password is incorrect')
+            if user is not None:
+                login(request, user)
+                return redirect('/')
+            else:
+                messages.info(request, 'Username OR password is incorrect')
 
-    context = {}
-    return render(request, 'store/login.html', context)
+        context = {}
+        return render(request, 'store/login.html', context)
+
+def logoutUser(request):
+    logout(request)
+    return redirect('/login')
 
 def store(request):
     data = cartData(request)

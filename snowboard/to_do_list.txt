@@ -1,0 +1,4 @@
+add a quantity button for checkout to be able to remove items
+create and link up view product page 
+on view page, allow user to like/favorite a product
+create blog page
