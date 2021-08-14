@@ -12,5 +12,7 @@ urlpatterns = [
     path('process_order', views.processOrder),
     path('<int:product_id>/like', views.like),
     path('<int:product_id>/unlike', views.unlike),
-    path('account', views.customerAccount)
+    path('account', views.customerAccount),
+    path('account/update', views.update_user),
+    path('blog', views.blog),
 ]

@@ -11,7 +11,26 @@
     </head>
 <body>
     {% block content %}
-        <p>Account page</p>
+        <h2>User Information</h2>
+        {% if user.is_authenticated %}
+            <form action="/account/update" method="POST">
+                {% csrf_token %}
+                <label>Username: <input type="text" name='username' value='{{user.username}}'></label>
+                <label>Email: <input type="email" name='email' value='{{user.email}}'></label>
+                <button type="submit">Update</button>
+            </form>
+        {% endif %}
+        <h2>Liked Products</h2>
+        {% for likedItem in likedItems %}
+            <div class="cart-row">
+                <div style="flex:2"><img class="row-image" src="{{likedItem.imageURL}}"></div>
+                <div style="flex:2"><p>{{likedItem.name}}</p></div>
+                <div style="flex:1"><p>${{likedItem.price}}</p></div>
+                <button data-product={{likedItem.id}} data-action='add' class='btn btn-outline-secondary add-btn update-cart'>Add to Cart</button>
+                <a class='btn btn-outline-danger' href="/{{likedItem.id}}/unlike">Remove</a>
+            </div>
+        {% endfor %}
+
     {% endblock content %}
 </body>
 </html>

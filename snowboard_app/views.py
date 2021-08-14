@@ -169,7 +169,26 @@ def unlike(request, product_id):
 def customerAccount(request):
     data = cartData(request)
     cartItems = data['cartItems']
+    user = request.user.id
+    likedItems = request.user.products_user_favorited.all()
+    products = Product.objects.all()
     context = {
         'cartItems': cartItems,
+        'likedItems': likedItems,
+        'products': products,
     }
     return render(request, 'store/customer_account.html', context)
+
+def update_user(request):
+    user = request.user.id
+    request.user.username = request.POST['username']
+    request.user.email = request.POST['email']
+    request.user.save()
+    messages.success(request, 'Succesfully updated account!')
+    return redirect(f'/account')
+
+def blog(request):
+    context = {
+
+    }
+    return render(request, 'store/blog.html', context)
