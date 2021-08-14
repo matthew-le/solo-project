@@ -7,12 +7,13 @@ from .forms import CreateUserForm
 from .models import *
 from django.http import JsonResponse
 import json
-import bcrypt
 import datetime
 from .utils import cookieCart, cartData, guestOrder
 
 # Create your views here.
 def registerPage(request):
+    data = cartData(request)
+    cartItems = data['cartItems']
     if request.user.is_authenticated:
         return redirect('/')
     else:
@@ -27,11 +28,14 @@ def registerPage(request):
                 messages.success(request, 'Account was successfully created!')
                 return redirect('/login')
         context = {
-            'form': form
+            'form': form,
+            'cartItems': cartItems
         }
         return render(request, 'store/register.html', context)
 
 def loginPage(request):
+    data = cartData(request)
+    cartItems = data['cartItems']
     if request.user.is_authenticated:
         return redirect('/')
     else:
@@ -47,7 +51,9 @@ def loginPage(request):
             else:
                 messages.info(request, 'Username OR password is incorrect')
 
-        context = {}
+        context = {
+            'cartItems': cartItems
+        }
         return render(request, 'store/login.html', context)
 
 def logoutUser(request):
@@ -145,3 +151,25 @@ def processOrder(request):
             zipcode = data['shipping']['zipcode'],
         )
     return JsonResponse('Payment complete', safe=False)
+
+def like(request, product_id):
+    if request.user.is_authenticated:
+        product = Product.objects.get(id=product_id)
+        user = request.user.id
+        product.users_who_favorited.add(user)
+    return redirect('/')
+
+def unlike(request, product_id):
+    if request.user.is_authenticated:
+        product = Product.objects.get(id=product_id)
+        user = request.user.id
+        product.users_who_favorited.remove(user)
+    return redirect('/')
+
+def customerAccount(request):
+    data = cartData(request)
+    cartItems = data['cartItems']
+    context = {
+        'cartItems': cartItems,
+    }
+    return render(request, 'store/customer_account.html', context)

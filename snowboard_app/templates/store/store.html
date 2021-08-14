@@ -7,7 +7,7 @@
     {% extends 'store/main.html' %}
     {% load static %}
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
-    <title>Document</title>
+    <title>Store</title>
 </head>
 <body>
     {% block content %}
@@ -19,8 +19,24 @@
                     <h6><strong>{{product.name}}</strong></h6>
                     <hr>
                     <button data-product={{product.id}} data-action='add' class='btn btn-outline-secondary add-btn update-cart'>Add to Cart</button>
-                    <a class='btn btn-outline-success' href="#">View</a>
+                    
+                    {% if user.is_authenticated %}
+                        {% if product.users_who_favorited.all %}
+                            {% if user in product.users_who_favorited.all %}
+                                <a class='btn btn-outline-danger' href="/{{product.id}}/unlike">Like</a>
+                            {% else %}
+                                <a class='btn btn-outline-success' href="/{{product.id}}/like">Like</a>
+                            {% endif %}
+                        {% else %}
+                            <a class='btn btn-outline-success' href="/{{product.id}}/like">Like</a>
+                        {% endif %}
+                    {% else %}
+                        <a class='btn btn-outline-success' href="/login">Like</a>
+                    {% endif %}
                     <h4 style='display: inline-block;'>${{product.price |floatformat:2}}</h4>
+                    {% if product.users_who_favorited.all %}
+                    <p>{{product.users_who_favorited.count}} user(s) liked this product</p>
+                    {% endif %}
                 </div>
             </div>
             {% endfor %}
