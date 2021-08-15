@@ -3,6 +3,12 @@ from django.contrib.auth.models import User
 import re
 
 # Create your models here.
+class CommentManager(models.Manager):
+    def validator(self, postData):
+        errors = {}
+        if len(postData['content']) < 1:
+            errors['content'] = 'Comment needs to be at least one character'
+        return errors
 
 class Customer(models.Model):
     user = models.OneToOneField(User, null=True, blank=True, on_delete=models.CASCADE)
@@ -82,3 +88,11 @@ class ShippingAddress(models.Model):
     state = models.CharField(max_length=255, null=False)
     zipcode = models.CharField(max_length=255, null=False)
     date_added = models.DateTimeField(auto_now_add=True)
+
+class Comment(models.Model):
+    content = models.TextField()
+    creator = models.ForeignKey(User, related_name='comments', on_delete=models.CASCADE)
+    users_who_liked = models.ManyToManyField(User, related_name='commentss_user_liked')
+    created_at = models.DateTimeField(auto_now_add=True, null='TRUE')
+    updated_at = models.DateTimeField(auto_now=True, null='TRUE')
+    objects = CommentManager() 

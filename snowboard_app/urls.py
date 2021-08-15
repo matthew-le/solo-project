@@ -15,4 +15,5 @@ urlpatterns = [
     path('account', views.customerAccount),
     path('account/update', views.update_user),
     path('blog', views.blog),
+    path('blog/post_comment', views.post_comment),
 ]

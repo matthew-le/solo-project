@@ -188,7 +188,22 @@ def update_user(request):
     return redirect(f'/account')
 
 def blog(request):
+    data = cartData(request)
+    cartItems = data['cartItems']
     context = {
-
+        'all_comments': Comment.objects.all(),
+        'cartItems': cartItems,
     }
     return render(request, 'store/blog.html', context)
+
+def post_comment(request):
+    errors = Comment.objects.validator(request.POST)
+    if errors: 
+        for val in errors.values():
+            messages.error(request,val)
+    elif request.user.is_authenticated:
+        Comment.objects.create(
+            content = request.POST['content'],
+            creator = User.objects.get(id=request.user.id),
+        )
+    return redirect('/blog')
