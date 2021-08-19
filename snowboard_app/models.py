@@ -92,7 +92,7 @@ class ShippingAddress(models.Model):
 class Comment(models.Model):
     content = models.TextField()
     creator = models.ForeignKey(User, related_name='comments', on_delete=models.CASCADE)
-    users_who_liked = models.ManyToManyField(User, related_name='commentss_user_liked')
+    users_who_liked = models.ManyToManyField(User, related_name='comments_user_liked')
     created_at = models.DateTimeField(auto_now_add=True, null='TRUE')
     updated_at = models.DateTimeField(auto_now=True, null='TRUE')
     objects = CommentManager() 
