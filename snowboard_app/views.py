@@ -183,6 +183,7 @@ def update_user(request):
     user = request.user.id
     request.user.username = request.POST['username']
     request.user.email = request.POST['email']
+    # request.user.password = request.POST['password']
     request.user.save()
     messages.success(request, 'Succesfully updated account!')
     return redirect(f'/account')
