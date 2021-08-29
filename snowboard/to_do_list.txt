@@ -1,2 +1,0 @@
-create and link up view product page 
-update and delete user comments in blog page
