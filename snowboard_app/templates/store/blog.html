@@ -19,21 +19,22 @@
         <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ullam cumque corrupti sint itaque hic eveniet! Tempore minima quidem expedita sit possimus deleniti ad! Neque vel fuga reiciendis ipsum quos dolores? Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laboriosam facere vitae saepe est odit volup dolor sit amet consectetur adipisicing elit. Architecto quia iusto quam? Sapiente beatae molestias eveniet iusto vero ad tenetur explicabo ducimus dicta fugit accusamus atque eum, dignissimos quaerat repellendus.</p>
         <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ullam cumque corrupti sint itaque hic eveniet! Tempore minima quidem expedita sit possimus deleniti ad! Neque vel fuga reiciendis ipsum quos dolores? Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
 
-
-        <h5>{{all_comments.count}} Comments:</h5>
-        {% if user.is_authenticated %}
-            <form action="/blog/post_comment" method="POST" id='comment-area'>
-                {% csrf_token%} 
-                <textarea name="content" cols="70" rows="1" placeholder='Add Comment...'></textarea>
-                <button id='submit' type="submit" class='btn btn-success'>Post</button>
-            </form>
-        {% endif %}
-        <br>
-        {% for comment in all_comments reversed %}
-            <div>
-                <p>{{comment.creator.username}} -- {{comment.created_at}} <br> {{comment.content}}</p>
-            </div>
-        {% endfor %}
+        <div class='box-element'>
+            <h6>{{all_comments.count}} Comment(s):</h6>
+            {% if user.is_authenticated %}
+                <form action="/blog/post_comment" method="POST" id='comment-area'>
+                    {% csrf_token%} 
+                    <textarea name="content" cols="70" rows="1" placeholder='Add Comment...'></textarea>
+                    <button id='submit' type="submit" class='btn btn-success'>Post</button>
+                </form>
+            {% endif %}
+            <br>
+            {% for comment in all_comments reversed %}
+                <div>
+                    <p>{{comment.creator.username}} | {{comment.created_at}} <br> <span class= 'glyphicon glyphicon-menu-right' aria-hidden='true'></span> {{comment.content}}</p>
+                </div>
+            {% endfor %}
+        </div>
 
     {% endblock content %}
 </body>
