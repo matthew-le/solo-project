@@ -4,6 +4,8 @@ Registration and Login Page:
 
 Store Home Page: 
 
+Account Page:
+
 Cart and Check Out Page: 
 
 Blog Page:
