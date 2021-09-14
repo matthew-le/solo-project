@@ -15,5 +15,3 @@ https://media.giphy.com/media/zhKDqaXOEp31BtOof5/giphy.gif?cid=790b76110aef11799
 
 Blog Page:
 https://media.giphy.com/media/aLjA42WwjymT0na433/giphy.gif?cid=790b7611fb367cad9709cf4dc0fbce1ecc2d22024bd28ce1&rid=giphy.gif&ct=g
-
-<iframe src="https://giphy.com/embed/daPVqIR8j7FI49dtUV" width="480" height="258" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/snowboardshop-daPVqIR8j7FI49dtUV">via GIPHY</a></p>
