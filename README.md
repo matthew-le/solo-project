@@ -1,3 +1,5 @@
+An online boardshop created specifically to provide snow gear to riders of all levels! Utilizes a blog that go over tips & tricks, new gear release dates, snow reports, and all other snow related topics to keep users engaged!
+
 A sneak peek of this project so far!
 
 Registration and Login Page: 
