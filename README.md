@@ -2,7 +2,7 @@ A sneak peek of this project so far!
 
 Registration and Login Page: 
 
-https://media.giphy.com/media/kg5zDdPek2hRde051t/giphy.mp4
+![login and registration page](static/readmeimages/snowboard_login.gif)
 
 Store Home Page: 
 https://media.giphy.com/media/E59nAyozb2ZmwJyx0f/giphy.mp4
