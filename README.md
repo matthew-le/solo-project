@@ -4,14 +4,18 @@ Registration and Login Page:
 
 ![login and registration page](snowboard_app/static/readmeimages/snowboard-login.gif)
 
-Store Home Page: 
+Store Home Page:
+
 ![store home page](snowboard_app/static/readmeimages/snowboard-shop.gif)
 
 Account Page:
+
 ![account page](snowboard_app/static/readmeimages/snowboard-account.gif)
 
 Cart and Checkout Page: 
-![cart and checkout page](snowboard_app/static/readmeimages/snowboard-account.gif)
+
+![cart and checkout page](snowboard_app/static/readmeimages/snowboard-cart.gif)
 
 Blog Page:
+
 ![blog page](snowboard_app/static/readmeimages/snowboard-blog.gif)
