@@ -34,10 +34,22 @@
             {% for comment in all_comments reversed %}
                 <div>
                     <p>{{comment.creator.username}} | {{comment.created_at}} <br> <span class= 'glyphicon glyphicon-menu-right' aria-hidden='true'></span> {{comment.content}}</p>
+                    {% if user.is_authenticated %}
+                        {% if comment.users_who_liked.all %}
+                            {% if user in comment.users_who_liked.all %}
+                            <p>{{comment.users_who_liked.count}} people like this</p><a href="/{{comment.id}}/unlike">Unlike</a>
+                            {% else %}
+                            <p>{{comment.users_who_liked.count}} people like this</p><a href="/{{comment.id}}/like">Like</a>
+                            {% endif %}
+                        {% else %}
+                        <p>{{comment.users_who_liked.count}} people like this</p><a href="/{{comment.id}}/like">Like</a>
+                        {% endif %}
+                    {% else %}
+                    <p>{{comment.users_who_liked.count}} people like this</p><a href="/login">Like</a>
+                    {% endif %}
                 </div>
             {% endfor %}
         </div>
-            <!-- create like button for comments section  -->
     {% endblock content %}
 </body>
 </html>

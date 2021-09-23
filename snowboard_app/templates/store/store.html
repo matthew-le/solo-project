@@ -23,12 +23,12 @@
                     {% if user.is_authenticated %}
                         {% if product.users_who_favorited.all %}
                             {% if user in product.users_who_favorited.all %}
-                                <a class='btn btn-outline-danger' href="/{{product.id}}/unlike">Like</a>
+                                <a class='btn btn-outline-danger' href="/{{product.id}}/unfavorite">Like</a>
                             {% else %}
-                                <a class='btn btn-outline-success' href="/{{product.id}}/like">Like</a>
+                                <a class='btn btn-outline-success' href="/{{product.id}}/favorite">Like</a>
                             {% endif %}
                         {% else %}
-                            <a class='btn btn-outline-success' href="/{{product.id}}/like">Like</a>
+                            <a class='btn btn-outline-success' href="/{{product.id}}/favorite">Like</a>
                         {% endif %}
                     {% else %}
                         <a class='btn btn-outline-success' href="/login">Like</a>

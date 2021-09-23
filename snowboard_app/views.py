@@ -152,19 +152,31 @@ def processOrder(request):
         )
     return JsonResponse('Payment complete', safe=False)
 
-def like(request, product_id):
+def favorite(request, product_id):
     if request.user.is_authenticated:
         product = Product.objects.get(id=product_id)
         user = request.user.id
         product.users_who_favorited.add(user)
     return redirect('/')
 
-def unlike(request, product_id):
+def unfavorite(request, product_id):
     if request.user.is_authenticated:
         product = Product.objects.get(id=product_id)
         user = request.user.id
         product.users_who_favorited.remove(user)
     return redirect('/')
+
+def like(request, comment_id):
+    comment = Comment.objects.get(id=comment_id)
+    user = request.user.id
+    comment.users_who_liked.add(user)
+    return redirect('/blog')
+
+def unlike(request, comment_id):
+    quote = Comment.objects.get(id=comment_id)
+    user = request.user.id
+    comment.users_who_liked.remove(user)
+    return redirect('/blog')
 
 def customerAccount(request):
     data = cartData(request)
