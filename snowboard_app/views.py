@@ -220,3 +220,19 @@ def post_comment(request):
             creator = User.objects.get(id=request.user.id),
         )
     return redirect('/blog')
+
+def weatherUpdate(request):
+    import requests
+    if 'city' in request.GET:
+        city = request.GET.get('city')
+
+        url = f"api.openweathermap.org/data/2.5/weather?q={city},&appid=a121802f42532c5c1d61eabf91d72d35"
+
+        x = requests.get(url)
+
+        x = x.json()
+
+        context = {
+            'weather': x['weather']
+        }
+    return render(request, 'store/weather.html', context)
