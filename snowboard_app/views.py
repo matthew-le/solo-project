@@ -233,18 +233,23 @@ def weatherUpdate(request):
 
     weather_data = []
 
-    for city in cities:
+    try:
+        for city in cities:
 
-        r = requests.get(url.format(city)).json()
+            r = requests.get(url.format(city)).json()
 
-        city_weather = {
-            'city' : city.name,
-            'temperature' : r['main']['temp'],
-            'description' : r['weather'][0]['description'],
-            'icon' : r['weather'][0]['icon'],
-        }
-
-        weather_data.append(city_weather)
+            city_weather = {
+                'city' : city.name,
+                'temperature' : r['main']['temp'],
+                'description' : r['weather'][0]['description'],
+                'icon' : r['weather'][0]['icon'],
+            }
+            
+            weather_data.append(city_weather)
+    except KeyError:
+        pass
+    except EXCEPTION as e:
+        pass
 
     context = {'weather_data' : weather_data, 'form' : form}
     return render(request, 'store/weather.html', context)
