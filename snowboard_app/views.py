@@ -3,12 +3,13 @@ from django.contrib import messages
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import authenticate, login, logout
 
-from .forms import CreateUserForm
+from .forms import CreateUserForm, CityForm
 from .models import *
 from django.http import JsonResponse
 import json
 import datetime
 from .utils import cookieCart, cartData, guestOrder
+import requests
 
 # Create your views here.
 def registerPage(request):
@@ -222,17 +223,29 @@ def post_comment(request):
     return redirect('/blog')
 
 def weatherUpdate(request):
-    import requests
-    if 'city' in request.GET:
-        city = request.GET.get('city')
+    url = 'http://api.openweathermap.org/data/2.5/weather?q={}&units=imperial&appid=a121802f42532c5c1d61eabf91d72d35'
+    if request.method == 'POST':
+        form = CityForm(request.POST)
+        form.save()
 
-        url = f"api.openweathermap.org/data/2.5/weather?q={city},&appid=a121802f42532c5c1d61eabf91d72d35"
+    form = CityForm()
 
-        x = requests.get(url)
+    cities = City.objects.all()
 
-        x = x.json()
+    weather_data = []
 
-        context = {
-            'weather': x['weather']
+    for city in cities:
+
+        r = requests.get(url.format(city)).json()
+
+        city_weather = {
+            'city' : city.name,
+            'temperature' : r['main']['temp'],
+            'description' : r['weather'][0]['description'],
+            'icon' : r['weather'][0]['icon'],
         }
+
+        weather_data.append(city_weather)
+
+    context = {'weather_data' : weather_data, 'form' : form}
     return render(request, 'store/weather.html', context)
