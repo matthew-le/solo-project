@@ -1,78 +1,65 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        {% extends 'store/main.html' %}
-        {% load static %}
-        <link rel="stylesheet" href="{% static 'css/style.css' %}">
-        <title>Store</title>
-    </head>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% extends 'store/main.html' %}
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <title>Store</title>
+</head>
+
 <body>
-    {% block content %}
-    <section class="hero is-primary">
-        <div class="hero-body">
-            <div class="container">
-                <h1 class="title">
-                    What's the weather like?
-                </h1>
+{% block content %}
+    <div class="hero-body">
+        <div class="container">
+            <h1 class="weather-title">
+                What's the weather like?
+            </h1>
+            <form method="POST">
+            {% csrf_token %}
+            <div class="field has-addons">
+                <div class="control is-expanded">
+                    {{ form.name }}
+                </div>
+                <div class="control">
+                        <button type="submit" class="button is-info">
+                            Add City
+                        </button>
+                </div>
             </div>
         </div>
-    </section>
-    <section class="section">
-        <div class="container">
-            <div class="columns">
-                <div class="column is-offset-4 is-4">
-                    <form method="POST">
-                        {% csrf_token %}
-                        <div class="field has-addons">
-                            <div class="control is-expanded">
-                                {{ form.name }}
-                            </div>
-                            <div class="control">
-                                <button type="submit" class="button is-info">
-                                    Add City
-                                </button>
+    </div>
+    <div class="container">
+        <div class="columns">
+            <div class='col-lg-6'>
+                {% for city_weather in weather_data %}
+                <div class="box">
+                    <article class="media">
+                        <div class="media-content">
+                            <div class="content">
+                                <div class="media-left">
+                                    <figure class="image is-50x50">
+                                        <img src="http://openweathermap.org/img/w/{{ city_weather.icon }}.png"
+                                            alt="Image">
+                                    </figure>
+                                </div>
+                                <p>
+                                    <span class="title">{{ city_weather.city }}</span>
+                                    <br>
+                                    <span class="subtitle">{{ city_weather.temperature }}° F</span>
+                                    <br> {{ city_weather.description }}
+                                </p>
                             </div>
                         </div>
-                    </form>
+                    </article>
                 </div>
+                {% endfor %}
             </div>
         </div>
-    </section>
-    <section class="section">
-        <div class="container">
-            <div class="columns">
-                <div class='col-lg-6'>
-                    {% for city_weather in weather_data %}
-                    <div class="box">
-                        <article class="media">
-                            <div class="media-content">
-                                <div class="content">
-                                    <div class="media-left">
-                                        <figure class="image is-50x50">
-                                            <img src="http://openweathermap.org/img/w/{{ city_weather.icon }}.png" alt="Image">
-                                        </figure>
-                                    </div>
-                                    <p>
-                                        <span class="title">{{ city_weather.city }}</span>
-                                        <br>
-                                        <span class="subtitle">{{ city_weather.temperature }}° F</span>
-                                        <br> {{ city_weather.description }}
-                                    </p>
-                                </div>
-                            </div>
-                        </article>
-                    </div>
-                    {% endfor %}
-                </div>
-            </div>
-        </div>
-    </section>
-    <footer class="footer">
-    </footer>
+    </div>
 </body>
-    {% endblock content %}
-</body>
+{% endblock content %}
 </html>
