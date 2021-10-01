@@ -110,3 +110,7 @@ textarea {
 	display:inline-block;
 	width:10%;
 }
+
+.box {
+	display: inline-block;
+}
