@@ -12,24 +12,24 @@
 </head>
 
 <body>
-{% block content %}
+    {% block content %}
     <div class="hero-body">
         <div class="container">
             <h1 class="weather-title">
                 What's the weather like?
             </h1>
             <form method="POST">
-            {% csrf_token %}
-            <div class="field has-addons">
-                <div class="control is-expanded">
-                    {{ form.name }}
-                </div>
-                <div class="control">
+                {% csrf_token %}
+                <div class="field has-addons">
+                    <div class="control is-expanded">
+                        {{ form.name }}
+                    </div>
+                    <div class="control">
                         <button type="submit" class="button is-info">
                             Add City
                         </button>
+                    </div>
                 </div>
-            </div>
         </div>
     </div>
     <div class="container">
@@ -37,24 +37,22 @@
             <div class='col-lg-6'>
                 {% for city_weather in weather_data %}
                 <div class="box">
-                    <article class="media">
-                        <div class="media-content">
-                            <div class="content">
-                                <div class="media-left">
-                                    <figure class="image is-50x50">
-                                        <img src="http://openweathermap.org/img/w/{{ city_weather.icon }}.png"
-                                            alt="Image">
-                                    </figure>
-                                </div>
-                                <p>
-                                    <span class="title">{{ city_weather.city }}</span>
-                                    <br>
-                                    <span class="subtitle">{{ city_weather.temperature }}° F</span>
-                                    <br> {{ city_weather.description }}
-                                </p>
+                    <div class="media-content">
+                        <div class="content">
+                            <div class="media-left">
+                                <figure class="image is-50x50">
+                                    <img src="http://openweathermap.org/img/w/{{ city_weather.icon }}.png"
+                                        alt="Image">
+                                </figure>
                             </div>
+                            <p>
+                                <span class="title">{{ city_weather.city }}</span>
+                                <br>
+                                <span class="subtitle">{{ city_weather.temperature }}° F</span>
+                                <br> {{ city_weather.description }}
+                            </p>
                         </div>
-                    </article>
+                    </div>
                 </div>
                 {% endfor %}
             </div>
@@ -62,4 +60,5 @@
     </div>
 </body>
 {% endblock content %}
+
 </html>
