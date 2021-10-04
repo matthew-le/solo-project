@@ -32,19 +32,15 @@
                 </div>
         </div>
     </div>
-    <div class="container">
-        <div class="columns">
-            <div class='col-lg-6'>
+    <div class="weather-container">
+        <div class="weather-columns">
                 {% for city_weather in weather_data %}
                 <div class="box">
                     <div class="media-content">
-                        <div class="content">
-                            <div class="media-left">
+                        <div class="weather-content">
                                 <figure class="image is-50x50">
-                                    <img src="http://openweathermap.org/img/w/{{ city_weather.icon }}.png"
-                                        alt="Image">
+                                    <img src="http://openweathermap.org/img/w/{{ city_weather.icon }}.png" alt="Image">
                                 </figure>
-                            </div>
                             <p>
                                 <span class="title">{{ city_weather.city }}</span>
                                 <br>
@@ -55,7 +51,6 @@
                     </div>
                 </div>
                 {% endfor %}
-            </div>
         </div>
     </div>
 </body>
