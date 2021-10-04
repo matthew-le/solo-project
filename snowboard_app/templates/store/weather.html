@@ -32,26 +32,22 @@
                 </div>
         </div>
     </div>
-    <div class="weather-container">
-        <div class="weather-columns">
+    <div class="container">
+            <div class="row">
                 {% for city_weather in weather_data %}
-                <div class="box">
-                    <div class="media-content">
-                        <div class="weather-content">
-                                <figure class="image is-50x50">
-                                    <img src="http://openweathermap.org/img/w/{{ city_weather.icon }}.png" alt="Image">
-                                </figure>
-                            <p>
-                                <span class="title">{{ city_weather.city }}</span>
-                                <br>
-                                <span class="subtitle">{{ city_weather.temperature }}° F</span>
-                                <br> {{ city_weather.description }}
-                            </p>
-                        </div>
-                    </div>
+                <div class="col-3">
+                    <figure class="image is-50x50">
+                        <img src="http://openweathermap.org/img/w/{{ city_weather.icon }}.png" alt="Image">
+                    </figure>
+                    <p>
+                        <span class="title">{{ city_weather.city }}</span>
+                        <br>
+                        <span class="subtitle">{{ city_weather.temperature }}° F</span>
+                        <br> {{ city_weather.description }}
+                    </p>
                 </div>
                 {% endfor %}
-        </div>
+            </div>
     </div>
 </body>
 {% endblock content %}
