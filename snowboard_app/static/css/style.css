@@ -101,7 +101,7 @@ h1,h2,h3,h4,h5,h6{
 	display:flex
 }
 
-textarea {
+.textarea {
 	display:inline-block;
 	resize:none;
 }
@@ -113,4 +113,8 @@ textarea {
 
 .box {
 	display: inline-block;
+}
+
+.hero-body {
+	margin-bottom: 50px;
 }
